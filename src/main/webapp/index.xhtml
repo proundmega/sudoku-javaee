@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Resolvedor de sudokus</title>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="solve.css" />
+        <h1>Ingrese el sudoku que desea resolver</h1>
+        <h:form id="form">
+            <div class='tabla'>
+                <ui:repeat value="#{frmSolve.indices}" var="fila">
+                    <div class="tupla">
+                        <ui:repeat value="#{frmSolve.indices}" var="columna">
+                            <p:inputText value="#{frmSolve.celdas[fila][columna]}" 
+                                         class="fila_#{fila} columna_#{columna} celda"/>
+                        </ui:repeat>
+                    </div>
+                </ui:repeat>
+            </div>
+
+            <div class="espacio_pequeño">
+                <h:commandButton value="Resolver"  actionListener="#{frmSolve.solveSudoku()}" />
+                <h:commandButton value="Limpiar" actionListener="#{frmSolve.limpiar()}"/>
+            </div>
+        </h:form>
+
+        <h:form id="mostrar">
+            <ui:fragment rendered="#{frmSolve.pasos.existeValor}">
+                <ui:repeat value="#{frmSolve.indices}" var="fila">
+                    <div class="tupla">
+                        <ui:repeat value="#{frmSolve.indices}" var="columna">
+                            <p:outputLabel value="#{frmSolve.pasos.actual.gridRespuesta.valoresAsString[fila][columna]}" 
+                                           class="fila_#{fila} columna_#{columna} celda_salida"/>
+                        </ui:repeat>
+                    </div>
+                </ui:repeat>
+                <div class="tupla espacio_pequeño">
+                    <h:commandButton value="Primero">
+                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.inicio()}"/>
+                    </h:commandButton>
+                    <h:commandButton value="Atras">
+                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.anterior()}"/>
+                    </h:commandButton>
+                    <h:commandButton value="Adelante">
+                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.siguiente()}"/>
+                    </h:commandButton>
+                    <h:commandButton value="Ultimo">
+                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.ultimo()}"/>
+                    </h:commandButton>
+                </div>
+            </ui:fragment>
+        </h:form>
+    </h:body>
+</html>
+

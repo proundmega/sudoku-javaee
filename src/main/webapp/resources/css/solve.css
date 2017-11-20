@@ -1,0 +1,70 @@
+#form {
+    text-align: center;
+}
+
+.tupla {
+    width: 100%;
+    text-align: center;
+}
+
+.celda {
+    width: 40px;
+    height: 40px;
+}
+
+.celda_salida {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 5px;
+    display: inline-table;
+    vertical-align: bottom;
+}
+
+#mostrar {
+    padding-top: 70px;
+    text-align: center;
+}
+
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+    border: 2px solid black;
+    margin-top: 70px;
+}
+
+.fila_0 {
+    border-top: 3px solid black;
+}
+
+.fila_3 {
+    border-top: 3px solid black;
+}
+
+.fila_6 {
+    border-top: 3px solid black;
+}
+
+.fila_8 {
+    border-bottom: 3px solid black;
+}
+
+.columna_0 {
+    border-left: 3px solid black;
+}
+
+.columna_3 {
+    border-left: 3px solid black;
+}
+
+.columna_6 {
+    border-left: 3px solid black;
+}
+
+.columna_8 {
+    border-right: 3px solid black;
+}
+
+.espacio_pequeño {
+    padding: 30px;
+}
