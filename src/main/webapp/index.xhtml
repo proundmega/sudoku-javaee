@@ -35,7 +35,8 @@
                     <div class="tupla">
                         <ui:repeat value="#{frmSolve.indices}" var="columna">
                             <p:outputLabel value="#{frmSolve.pasos.actual.gridRespuesta.valoresAsString[fila][columna]}" 
-                                           class="fila_#{fila} columna_#{columna} celda_salida"/>
+                                           class="fila_#{fila} columna_#{columna} 
+                                                celda_salida #{frmSolve.getStyleDeCelda(fila, columna)}"/>
                         </ui:repeat>
                     </div>
                 </ui:repeat>
@@ -43,10 +44,10 @@
                     <h:commandButton value="Primero">
                         <p:ajax update=":mostrar" listener="#{frmSolve.pasos.inicio()}"/>
                     </h:commandButton>
-                    <h:commandButton value="Atras">
+                    <h:commandButton value="Atras"  disabled="#{!frmSolve.pasos.hayPrevio()}">
                         <p:ajax update=":mostrar" listener="#{frmSolve.pasos.anterior()}"/>
                     </h:commandButton>
-                    <h:commandButton value="Adelante">
+                    <h:commandButton value="Adelante" disabled="#{!frmSolve.pasos.haySiguiente()}">
                         <p:ajax update=":mostrar" listener="#{frmSolve.pasos.siguiente()}"/>
                     </h:commandButton>
                     <h:commandButton value="Ultimo">

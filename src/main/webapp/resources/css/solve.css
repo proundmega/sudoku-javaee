@@ -68,3 +68,11 @@ table.center {
 .espacio_pequeño {
     padding: 30px;
 }
+
+.celda_resuelta {
+    background-color: blue;
+}
+
+.celda_limitante {
+    background-color: lightsalmon;
+}
