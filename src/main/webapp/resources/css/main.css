@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    margin: 10px 10px 10px 10px;
+}
+
+.main-header {
+    width: 100%;
+    display: flex;
+}
+
+#titulo {
+    font-family: 'Indie Flower', cursive;
+    width: 30%;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+h1 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 32px;
+}
+
+h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin: 10px 0px 10px 0px;
+}
+
+.dark-primary-color    { background: #00796B; }
+.default-primary-color { background: #009688; }
+.light-primary-color   { background: #B2DFDB; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #9E9E9E; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
