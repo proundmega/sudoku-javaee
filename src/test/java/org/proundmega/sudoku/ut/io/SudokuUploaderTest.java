@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 import org.junit.experimental.categories.Category;
 import static org.mockito.Mockito.*;
 import org.proundmega.sudoku.data.GridFactory;
-import org.proundmega.sudoku.io.InvalidFormatException;
+import org.proundmega.sudokucore.io.InvalidSudokuFormatException;
 import org.proundmega.sudoku.io.SudokuUploader;
 import org.proundmega.sudokucore.Sudoku;
 import org.proundmega.test.UnitTest;
@@ -46,7 +46,7 @@ public class SudokuUploaderTest {
         return mock;
     }
     
-    @Test(expected = InvalidFormatException.class)
+    @Test(expected = InvalidSudokuFormatException.class)
     public void archivoConCeldasConValoresIncorrectos() throws Exception {
         File archivo = TestUtils.getTestResource("data", "sudokuInvalido1.txt");
         
@@ -54,7 +54,7 @@ public class SudokuUploaderTest {
         Sudoku obtenido = uploader.crearSudoku();
     }
     
-    @Test(expected = InvalidFormatException.class)
+    @Test(expected = InvalidSudokuFormatException.class)
     public void archivoConFilaExtraMala() throws Exception {
         File archivo = TestUtils.getTestResource("data", "sudokuInvalido2.txt");
         
@@ -62,7 +62,7 @@ public class SudokuUploaderTest {
         Sudoku obtenido = uploader.crearSudoku();
     }
     
-    @Test(expected = InvalidFormatException.class)
+    @Test(expected = InvalidSudokuFormatException.class)
     public void archivoConFilaFaltante() throws Exception {
         File archivo = TestUtils.getTestResource("data", "sudokuInvalido3.txt");
         

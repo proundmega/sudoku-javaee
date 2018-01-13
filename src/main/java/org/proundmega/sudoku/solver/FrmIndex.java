@@ -9,25 +9,29 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import lombok.Data;
-import org.proundmega.sudoku.io.InvalidFormatException;
 import org.proundmega.sudoku.io.SudokuUploader;
+import org.proundmega.sudoku.usuario.UsuarioData;
 import org.proundmega.sudokucore.*;
+import org.proundmega.sudokucore.io.InvalidSudokuFormatException;
 import org.slf4j.Logger;
 
 @Data
-@Named(value = "frmSolve")
+@Named
 @ViewScoped
-public class FrmSolve implements Serializable {
+public class FrmIndex implements Serializable {
 
     private String[][] celdas;
     private IteradorSudoku pasos;
-    private boolean resuelto;
+    private boolean archivoSubido;
 
     @Inject
     private SudokuUploader sudokuUploader;
 
     @Inject
     private Logger logger;
+    
+    @Inject
+    private UsuarioData usuarioData;
 
     private static final String VACIO = "";
     private static final Integer[] INDICES;
@@ -39,13 +43,13 @@ public class FrmSolve implements Serializable {
         }
     }
 
-    public FrmSolve() {
+    public FrmIndex() {
     }
 
     @PostConstruct
     private void init() {
         inicializarSudoku();
-        resuelto = false;
+        archivoSubido = false;
     }
 
     private void inicializarSudoku() {
@@ -59,10 +63,7 @@ public class FrmSolve implements Serializable {
     }
 
     public void solveSudoku() {
-        Sudoku sudokuAResolver = new Sudoku(celdas);
-        pasos = sudokuAResolver.solveAsIterador();
-
-        resuelto = true;
+        usuarioData.setSudokuActual(new Sudoku(celdas));
     }
 
     public Integer[] getIndices() {
@@ -73,37 +74,6 @@ public class FrmSolve implements Serializable {
         init();
     }
 
-    public void siguiente() {
-        pasos.siguiente();
-    }
-
-    public String getStyleDeCelda(int fila, int columna) {
-        if (pasos.getActual().isAvanceEnResolver()) {
-            MetadataSolver metadatos = pasos.getActual().getMetadatos();
-            Posicion posicionResuelta = metadatos.getPosicionResuelta();
-
-            if (esLaCasillaResuelta(posicionResuelta, fila, columna)) {
-                return "celda_resuelta";
-            }
-
-            if (esUnaCasillaQueLimitaSudoku(metadatos, fila, columna)) {
-                return "celda_limitante";
-            }
-        }
-        return "";
-    }
-
-    private static boolean esLaCasillaResuelta(Posicion posicionResuelta, int fila, int columna) {
-        return posicionResuelta.getFila().getIndiceFilaParaArray() == fila
-                && posicionResuelta.getColumna().getIndiceColumnaParaArray() == columna;
-    }
-
-    private boolean esUnaCasillaQueLimitaSudoku(MetadataSolver metadata, int fila, int columna) {
-        return metadata.getCeldasQueLimitanValor().stream()
-                .anyMatch(posicion -> posicion.getFila().getIndiceFilaParaArray() == fila
-                && posicion.getColumna().getIndiceColumnaParaArray() == columna);
-    }
-
     public void subirArchivo() {
         try {
             Sudoku crearSudoku = sudokuUploader.crearSudoku();
@@ -111,8 +81,11 @@ public class FrmSolve implements Serializable {
         } catch (IOException ex) {
             crearErrorFaces("No se pudo subir el archivo al servido, contacte a IT sobre el error");
             logger.error("No se pudo leer el archivo enviado", ex);
-        } catch (InvalidFormatException ex) {
+        } catch (InvalidSudokuFormatException ex) {
             crearErrorFaces("El archivo no posee el formato adecuado");
+            logger.info("Se intento subir un archivo como sudoku sin exito alguno");
+        } catch (NullPointerException ex) {
+            crearErrorFaces("Debe subir un archivo para usar la importacion por archivo");
             logger.info("Se intento subir un archivo como sudoku sin exito alguno");
         }
     }

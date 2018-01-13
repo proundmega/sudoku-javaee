@@ -1,0 +1,18 @@
+.celda_resuelta {
+    background-color: blue;
+    margin: 0 0 0 0;
+}
+
+.celda_limitante {
+    background-color: lightsalmon;
+    margin: 0 0 0 0;
+}
+
+.celda_bloque {
+    background-color: background;
+    margin: 0 0 0 0;
+}
+
+.tupla_sudoku {
+    display: inline-block;
+}

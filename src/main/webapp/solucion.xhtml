@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Solucion del sudoku</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/main.xhtml">
+            <ui:define name="contenido">
+                <h:outputStylesheet library="css" name="commons-sudoku.css" />
+                <h:outputStylesheet library="css" name="solucion.css" />
+                
+                <h:form id="frmMostrar">
+                    <h2>Respuesta</h2>
+                    <ui:repeat value="#{commonsSudoku.indices}" var="fila">
+                        <div class="tupla tupla_sudoku">
+                            <ui:repeat value="#{commonsSudoku.indices}" var="columna">
+                                <p:outputLabel value="#{frmSolucion.pasos.actual.gridRespuesta.valoresAsString[fila][columna]}" 
+                                               class="fila_#{fila} columna_#{columna} 
+                                               celda_salida #{frmSolucion.getStyleDeCelda(fila, columna)}"/>
+                            </ui:repeat>
+                        </div>
+                    </ui:repeat>
+                    <div class="tupla espacio_pequeño">
+                        <h:commandButton value="Primero">
+                            <p:ajax update=":frmMostrar" listener="#{frmSolucion.pasos.inicio()}"/>
+                        </h:commandButton>
+                        <h:commandButton value="Atras"  disabled="#{!frmSolucion.pasos.hayPrevio()}">
+                            <p:ajax update=":frmMostrar" listener="#{frmSolucion.pasos.anterior()}"/>
+                        </h:commandButton>
+                        <h:commandButton value="Adelante" disabled="#{!frmSolucion.pasos.haySiguiente()}">
+                            <p:ajax update=":frmMostrar" listener="#{frmSolucion.pasos.siguiente()}"/>
+                        </h:commandButton>
+                        <h:commandButton value="Ultimo">
+                            <p:ajax update=":frmMostrar" listener="#{frmSolucion.pasos.ultimo()}"/>
+                        </h:commandButton>
+                    </div>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

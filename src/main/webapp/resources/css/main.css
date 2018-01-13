@@ -41,3 +41,12 @@ h2 {
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
+
+.espacio_pequeño {
+    padding: 30px;
+}
+
+.tupla {
+    width: 100%;
+    text-align: center;
+}

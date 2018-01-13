@@ -9,73 +9,38 @@
         <title>Resolvedor de sudokus</title>
     </h:head>
     <h:body>
-        <h:outputStylesheet library="css" name="main.css" />
-        <h:outputStylesheet library="css" name="solve.css" />
-        <link href="https://fonts.googleapis.com/css?family=Arimo|Indie+Flower" rel="stylesheet"/> 
-
-        <header class="main-header dark-primary-color" role="banner">
-            <h:graphicImage library="imagenes" name="logo.png" class="logo"/>
-            <div id="titulo" class="text-primary-color">
-                Solve my sudoku
-            </div>
-        </header>
-
-        <h2>Ingrese el sudoku que desea resolver</h2>
-        <h:form id="form" enctype="multipart/form-data">
-            <h:messages id="errores"/>
-            <div class='tabla' id="tabla">
-                <ui:repeat value="#{frmSolve.indices}" var="fila">
-                    <div class="tupla">
-                        <ui:repeat value="#{frmSolve.indices}" var="columna">
-                            <p:inputText value="#{frmSolve.celdas[fila][columna]}" 
-                                         class="fila_#{fila} columna_#{columna} celda"/>
+        <ui:composition template="/template/main.xhtml">
+            <ui:define name="contenido">
+                <h:outputStylesheet library="css" name="commons-sudoku.css" />
+                <h:outputStylesheet library="css" name="index.css" />
+                
+                <h2>Ingrese el sudoku que desea resolver</h2>
+                <h:form id="form" enctype="multipart/form-data">
+                    <h:messages id="errores"/>
+                    <div class='tabla' id="tabla">
+                        <ui:repeat value="#{frmIndex.indices}" var="fila">
+                            <div class="tupla">
+                                <ui:repeat value="#{frmIndex.indices}" var="columna">
+                                    <p:inputText value="#{frmIndex.celdas[fila][columna]}" 
+                                                 class="fila_#{fila} columna_#{columna} celda"/>
+                                </ui:repeat>
+                            </div>
                         </ui:repeat>
                     </div>
-                </ui:repeat>
-            </div>
 
-            <div class="espacio_pequeño">
-                <h:commandButton value="Resolver"  actionListener="#{frmSolve.solveSudoku()}" />
-                <h:commandButton value="Limpiar" actionListener="#{frmSolve.limpiar()}"/>
-            </div>
-
-            <div class="espacio_pequeño">
-                <h2>Subir sudoku guardado</h2>
-                <h:inputFile value="#{frmSolve.sudokuUploader.archivo}"/>
-                <h:commandButton value="Subir archivo" actionListener="#{frmSolve.subirArchivo()}"/>
-            </div>
-
-        </h:form>
-
-        <h:form id="mostrar">
-            <ui:fragment rendered="#{frmSolve.pasos.existeValor}">
-                <h2>Respuesta</h2>
-                <ui:repeat value="#{frmSolve.indices}" var="fila">
-                    <div class="tupla">
-                        <ui:repeat value="#{frmSolve.indices}" var="columna">
-                            <p:outputLabel value="#{frmSolve.pasos.actual.gridRespuesta.valoresAsString[fila][columna]}" 
-                                           class="fila_#{fila} columna_#{columna} 
-                                           celda_salida #{frmSolve.getStyleDeCelda(fila, columna)}"/>
-                        </ui:repeat>
+                    <div class="espacio_pequeño">
+                        <h:commandButton value="Resolver"  actionListener="#{frmIndex.solveSudoku()}" action="solucion"/>
+                        <h:commandButton value="Limpiar" actionListener="#{frmIndex.limpiar()}"/>
                     </div>
-                </ui:repeat>
-                <div class="tupla espacio_pequeño">
-                    <h:commandButton value="Primero">
-                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.inicio()}"/>
-                    </h:commandButton>
-                    <h:commandButton value="Atras"  disabled="#{!frmSolve.pasos.hayPrevio()}">
-                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.anterior()}"/>
-                    </h:commandButton>
-                    <h:commandButton value="Adelante" disabled="#{!frmSolve.pasos.haySiguiente()}">
-                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.siguiente()}"/>
-                    </h:commandButton>
-                    <h:commandButton value="Ultimo">
-                        <p:ajax update=":mostrar" listener="#{frmSolve.pasos.ultimo()}"/>
-                    </h:commandButton>
-                </div>
-            </ui:fragment>
-        </h:form>
 
+                    <div class="espacio_pequeño">
+                        <h2>Subir sudoku guardado</h2>
+                        <h:inputFile value="#{frmIndex.sudokuUploader.archivo}"/>
+                        <h:commandButton value="Subir archivo" actionListener="#{frmIndex.subirArchivo()}" />
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 
