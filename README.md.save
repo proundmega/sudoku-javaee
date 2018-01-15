@@ -1,0 +1,23 @@
+Este proyecto es sobre un solucionador de Sudokus usando Java EE como
+backend. Esta parte del proyecto solo es el cliente web. El solucionador como
+tal esta en el siguiente repositorio:
+
+	https://github.com/proundmega/sudoku-core
+
+El proyecto es capaz de resolver sudokus de nivel facil y algunos de nivel
+intermedio, solo haria falta implementar las soluciones mas complicadas.
+Ademas faltaria explicar los pasos.
+
+Features del proyectos:
+
+- Resuelve los sudokus que le pongan en frente (faciles y medios)
+- Muestra paso a paso como resolverlos, con la capacidad de ir y regresar
+  los pasos
+- Imprime con otro color el area que se esta resolviendo y las casillas que
+  se envuelven en cierta respuesta
+- Permite importar sudokus desde un archivo de texto
+
+Cosas por añadir
+
+- Explicacion de los pasos y como se llega a ellos
+- Mostrar anotaciones en ciertas etap- Mostrar cuad

@@ -1,10 +1,15 @@
 Este proyecto es sobre un solucionador de Sudokus usando Java EE como
-backend.
+backend. Este repositorio solo muestra el cliente web, para ver el solucionador
+como tal por favor visite:
 
-Actualmente los resuelve y muestra ciertas casillas que influyen en la
-respuesta. Falta añadir mas casillas, la explicacion de los pasos y
-ordenar la app. 
+	https://github.com/proundmega/sudoku-core
 
-Aparte de resolverlos permite importarlos en un archivo de texto en el
-caso en que el usuario los tenga en texto plano. Pronto añado soporte
-para exportarlos y manejo de sesiones.
+
+Features:
+
+- Resuelve cualquier sudoku con dificultad facil e intermedia
+- Muestra paso a paso como resolver el sudoku
+- Muestra el "area de trabajo" y las casillas que ayudan a resolver el sudoku
+- Permite moverse a traves de los pasos
+- Es posible importar los sudokus desde un archivo de texto
+
