@@ -1,17 +1,44 @@
 .celda {
-    width: 40px;
-    height: 40px;
+    width: 2em;
+    height: 2em;
 }
 
-.celda_salida {
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
-    padding: 5px;
-    display: inline-block;
-    vertical-align: bottom;
-    margin: 0 0 0 0;
+@media (min-width: 1000px) {
+    .celda_salida {
+        width: 3em;
+        height: 3em;
+        border: 1px solid black;
+        padding: 5px;
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0 0 0 0;
+    }
 }
+
+@media (max-width: 1000px) and (min-width: 400px) {
+    .celda_salida {
+        width: 2em;
+        height: 2em;
+        border: 1px solid black;
+        padding: 5px;
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0 0 0 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .celda_salida {
+        width: 1.5em;
+        height: 1.5em;
+        border: 1px solid black;
+        padding: 5px;
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0 0 0 0;
+    }
+}
+
 
 table.center {
     margin-left:auto; 
