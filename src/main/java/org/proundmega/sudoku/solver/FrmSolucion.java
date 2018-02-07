@@ -1,10 +1,12 @@
 package org.proundmega.sudoku.solver;
 
 import java.io.Serializable;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.proundmega.sudoku.usuario.UsuarioData;
@@ -64,14 +66,19 @@ public class FrmSolucion implements Serializable {
     }
 
     private boolean esUnaCasillaQueLimitaSudoku(MetadataSolver metadata, int fila, int columna) {
-        return metadata.getCeldasQueLimitanValor().stream()
+        return metadata.getPosicionBundle().getPosicionesQueLimitanValor().stream()
                 .anyMatch(posicion -> posicion.getFila().getIndiceFilaParaArray() == fila
                 && posicion.getColumna().getIndiceColumnaParaArray() == columna);
     }
     
     private boolean esParteDelBloque(MetadataSolver metadata, int fila, int columna) {
-        return metadata.getCeldasLimitantesEnBloque().stream()
+        return metadata.getPosicionBundle().getPosicionesLimitantesEnBloque().stream()
                 .anyMatch(posicion -> posicion.getFila().getIndiceFilaParaArray() == fila
                 && posicion.getColumna().getIndiceColumnaParaArray() == columna);
+    }
+    
+    public String getExplicacionPaso() {
+        Locale localActual = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+        return pasos.getActual().getMetadatos().getExplicacion(localActual);
     }
 }
